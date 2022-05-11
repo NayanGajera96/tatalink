@@ -119,7 +119,7 @@ function App() {
       authorization: loginType === 'OTP' ? otp : pwd,
       loginOption: loginType
     };
-    if(loginType === 'OTP')
+    if (loginType === 'OTP')
       raw.rmn = rmn;
 
     raw = JSON.stringify(raw);
@@ -180,8 +180,8 @@ function App() {
             token === "" || theUser === null ?
               <Grid.Row>
                 <Grid.Column></Grid.Column>
-                <Grid.Column computer={8} tablet={12} mobile={16}>
-                  <Segment loading={loading}>
+                <Grid.Column computer={ 8 } tablet={ 12 } mobile={ 16 }>
+                  <Segment loading={ loading }>
                     <Form>
                       <Form.Group inline>
                         <label>Login via </label>
@@ -190,8 +190,8 @@ function App() {
                             label='OTP'
                             name='loginTypeRadio'
                             value='OTP'
-                            checked={loginType === 'OTP'}
-                            onChange={(e, { value }) => { setLoginType(value); }}
+                            checked={ loginType === 'OTP' }
+                            onChange={ (e, { value }) => { setLoginType(value); } }
                           />
                         </Form.Field>
                         <Form.Field>
@@ -199,8 +199,8 @@ function App() {
                             label='Password'
                             name='loginTypeRadio'
                             value='PWD'
-                            checked={loginType === 'PWD'}
-                            onChange={(e, { value }) => { setLoginType(value); }}
+                            checked={ loginType === 'PWD' }
+                            onChange={ (e, { value }) => { setLoginType(value); } }
                           />
                         </Form.Field>
                       </Form.Group>
@@ -208,34 +208,34 @@ function App() {
                       {
                         loginType === 'OTP' ?
                           <>
-                            <Form.Field disabled={otpSent}>
+                            <Form.Field disabled={ otpSent }>
                               <label>RMN</label>
-                              <input value={rmn} placeholder='Registered Mobile Number' onChange={(e) => setRmn(e.currentTarget.value)} />
+                              <input value={ rmn } placeholder='Registered Mobile Number' onChange={ (e) => setRmn(e.currentTarget.value) } />
                             </Form.Field>
-                            <Form.Field disabled={otpSent}>
+                            <Form.Field disabled={ otpSent }>
                               <label>Subscriber ID</label>
-                              <input value={sid} placeholder='Subscriber ID' onChange={(e) => setSid(e.currentTarget.value)} />
+                              <input value={ sid } placeholder='Subscriber ID' onChange={ (e) => setSid(e.currentTarget.value) } />
                             </Form.Field>
-                            <Form.Field disabled={!otpSent}>
+                            <Form.Field disabled={ !otpSent }>
                               <label>OTP</label>
-                              <input value={otp} placeholder='OTP' onChange={(e) => setOtp(e.currentTarget.value)} />
+                              <input value={ otp } placeholder='OTP' onChange={ (e) => setOtp(e.currentTarget.value) } />
                             </Form.Field>
                             {
-                              otpSent ? <Button primary onClick={authenticateUser}>Login</Button> :
-                                <Button primary onClick={getOTP}>Get OTP</Button>
+                              otpSent ? <Button primary onClick={ authenticateUser }>Login</Button> :
+                                <Button primary onClick={ getOTP }>Get OTP</Button>
                             }
                           </>
                           :
                           <>
                             <Form.Field>
                               <label>Subscriber ID</label>
-                              <input value={sid} placeholder='Subscriber ID' onChange={(e) => setSid(e.currentTarget.value)} />
+                              <input value={ sid } placeholder='Subscriber ID' onChange={ (e) => setSid(e.currentTarget.value) } />
                             </Form.Field>
                             <Form.Field>
                               <label>Password</label>
-                              <input type='password' value={pwd} placeholder='Password' onChange={(e) => setPwd(e.currentTarget.value)} />
+                              <input type='password' value={ pwd } placeholder='Password' onChange={ (e) => setPwd(e.currentTarget.value) } />
                             </Form.Field>
-                            <Button primary onClick={authenticateUser}>Login</Button>
+                            <Button primary onClick={ authenticateUser }>Login</Button>
                           </>
                       }
 
@@ -246,16 +246,16 @@ function App() {
               </Grid.Row> :
               <Grid.Row>
                 <Grid.Column></Grid.Column>
-                <Grid.Column computer={8} tablet={12} mobile={16}>
-                  <Segment loading={loading}>
-                    <Header as="h1">Welcome, {theUser.sName}</Header>
+                <Grid.Column computer={ 8 } tablet={ 12 } mobile={ 16 }>
+                  <Segment loading={ loading }>
+                    <Header as="h1">Welcome, { theUser.sName }</Header>
                     {
                       theUser !== null && theUser.acStatus !== "DEACTIVATED" ?
                         <Message>
                           <Message.Header>Dynamic URL to get m3u: </Message.Header>
-                          {/* <Image centered src={'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' + encodeURIComponent(m3uMeta.url)} size='small' /> */}
+                          {/* <Image centered src={'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' + encodeURIComponent(m3uMeta.url)} size='small' /> */ }
                           <p>
-                            <a href={dynamicUrl}>{dynamicUrl}</a>
+                            <a href={ dynamicUrl }>{ dynamicUrl }</a>
                           </p>
                           <p>
                             You can use the above m3u URL in OTT Navigator or Tivimate app to watch all your subscribed channels.
@@ -265,22 +265,22 @@ function App() {
                           </p>
                         </Message>
                         :
-                        <Header as='h3' style={{ color: 'red' }}>Your Tata Sky Connection is deactivated.</Header>
+                        <Header as='h3' style={ { color: 'red' } }>Your Tata Sky Connection is deactivated.</Header>
                     }
 
-                    <Button negative onClick={logout}>Logout</Button>
+                    <Button negative onClick={ logout }>Logout</Button>
                   </Segment>
                 </Grid.Column>
                 <Grid.Column></Grid.Column>
               </Grid.Row>
           }
-          <Grid.Row style={{ display: err === '' ? 'none' : 'block' }}>
+          <Grid.Row style={ { display: err === '' ? 'none' : 'block' } }>
             <Grid.Column></Grid.Column>
-            <Grid.Column computer={8} tablet={12} mobile={16}>
+            <Grid.Column computer={ 8 } tablet={ 12 } mobile={ 16 }>
               <Message color='red'>
                 <Message.Header>Error</Message.Header>
                 <p>
-                  {err}
+                  { err }
                 </p>
               </Message>
             </Grid.Column>
@@ -288,8 +288,8 @@ function App() {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column></Grid.Column>
-            <Grid.Column textAlign='center' computer={8} tablet={12} mobile={16}>
-              <a href="https://github.com/saifshaikh1805/tata-sky-m3u" target="_blank">View source code on Github</a>
+            <Grid.Column textAlign='center' computer={ 8 } tablet={ 12 } mobile={ 16 }>
+              Twik by hulk_tech
             </Grid.Column>
             <Grid.Column></Grid.Column>
           </Grid.Row>
