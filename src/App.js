@@ -16,6 +16,7 @@ function App() {
   const [loginType, setLoginType] = useState("OTP");
   const [pwd, setPwd] = useState("");
 
+  const data = { "accessToken": "rBPGqtF5hltVLskgC6ViEn7PGIio0QWO", "entitlements": [{ "type": "", "pkgId": "0000000000", "status": null }, { "type": "", "pkgId": "1000000094", "status": null }, { "type": "", "pkgId": "1000000095", "status": null }, { "type": "", "pkgId": "1000000116", "status": null }, { "type": "", "pkgId": "1000000167", "status": null }, { "type": "", "pkgId": "1000000187", "status": null }, { "type": "", "pkgId": "1000000188", "status": null }, { "type": "", "pkgId": "1000000193", "status": null }, { "type": "", "pkgId": "1000000194", "status": null }, { "type": "", "pkgId": "1000000200", "status": null }, { "type": "", "pkgId": "1000000226", "status": null }, { "type": "", "pkgId": "1000000241", "status": null }, { "type": "", "pkgId": "1000000273", "status": null }, { "type": "", "pkgId": "1000000306", "status": null }, { "type": "", "pkgId": "1000000307", "status": null }, { "type": "", "pkgId": "1000000323", "status": null }, { "type": "", "pkgId": "1000000341", "status": null }, { "type": "", "pkgId": "1000000365", "status": null }, { "type": "", "pkgId": "1000000366", "status": null }, { "type": "", "pkgId": "1000000367", "status": null }, { "type": "", "pkgId": "1000000370", "status": null }, { "type": "", "pkgId": "1000000375", "status": null }, { "type": "", "pkgId": "1000000384", "status": null }, { "type": "", "pkgId": "1000000413", "status": null }, { "type": "", "pkgId": "1000000486", "status": null }, { "type": "", "pkgId": "1000000519", "status": null }, { "type": "", "pkgId": "1000000520", "status": null }, { "type": "", "pkgId": "1000000591", "status": null }, { "type": "", "pkgId": "1000000605", "status": null }, { "type": "", "pkgId": "1000000675", "status": null }, { "type": "", "pkgId": "1000000677", "status": null }, { "type": "", "pkgId": "1000000678", "status": null }, { "type": "", "pkgId": "1000000683", "status": null }, { "type": "", "pkgId": "1000000757", "status": null }, { "type": "", "pkgId": "1000001033", "status": null }, { "type": "", "pkgId": "1000001274", "status": null }, { "type": "", "pkgId": "1000001368", "status": null }, { "type": "", "pkgId": "1000001510", "status": null }, { "type": "", "pkgId": "1000001512", "status": null }, { "type": "", "pkgId": "1000001543", "status": null }, { "type": "", "pkgId": "1000001544", "status": null }, { "type": "", "pkgId": "1000001591", "status": null }, { "type": "", "pkgId": "1000001594", "status": null }, { "type": "", "pkgId": "1000001685", "status": null }], "sid": "1307777332", "sName": "Bhavesh Ladhwani", "acStatus": "ACTIVE", "profileId": "c8064a51-a38b-4856-a6b8-fa04c476ca42", "loggedIn": "true" }
 
   useEffect(() => {
     let tok = localStorage.getItem("token");
@@ -35,7 +36,7 @@ function App() {
         console.log('mko');
         console.log(process.env.REACT_APP_M3U_FUNCTION_BASE_URL);
         var raw = JSON.stringify({
-          "long_url": process.env.REACT_APP_M3U_FUNCTION_BASE_URL + '/api/getM3u?sid=' + theUser.sid + '_' + theUser.acStatus[0] + '&sname=' + theUser.sName + '&tkn=' + token + '&ent=' + theUser.entitlements.map(x => x.pkgId).join('_')
+          "long_url": 'https://my-tatasky.vercel.app' + '/api/getM3u?sid=' + theUser.sid + '_' + theUser.acStatus[0] + '&sname=' + theUser.sName + '&tkn=' + token + '&ent=' + data.entitlements.map(x => x.pkgId).join('_')
         });
 
         var requestOptions = {
@@ -45,16 +46,17 @@ function App() {
           redirect: 'follow'
         };
 
+        // @ts-ignore
         fetch("https://api-ssl.bitly.com/v4/shorten", requestOptions)
           .then(response => response.text())
           .then(result => {
-            console.log(result);
+            console.log('this', result);
             setDynamicUrl(JSON.parse(result).link);
           })
           .catch(error => console.log('error', error));
       }
       else
-        console.log(process.env.REACT_APP_M3U_FUNCTION_BASE_URL + '/api/getM3u?sid=' + theUser.sid + '_' + theUser.acStatus[0] + '&sname=' + theUser.sName + '&tkn=' + token + '&ent=' + theUser.entitlements.map(x => x.pkgId).join('_'));
+        console.log(process.env.REACT_APP_M3U_FUNCTION_BASE_URL + '/api/getM3u?sid=' + theUser.sid + '_' + theUser.acStatus[0] + '&sname=' + theUser.sName + '&tkn=' + token + '&ent=' + data.entitlements.map(x => x.pkgId).join('_'));
     }
     else
       setDynamicUrl("");
@@ -122,6 +124,7 @@ function App() {
     if (loginType === 'OTP')
       raw.rmn = rmn;
 
+    // @ts-ignore
     raw = JSON.stringify(raw);
 
     var requestOptions = {
@@ -132,6 +135,7 @@ function App() {
 
     let res = {};
 
+    // @ts-ignore
     fetch("https://cors-pub.herokuapp.com/" + "https://kong-tatasky.videoready.tv/rest-api/pub/api/v2/login/ott", requestOptions)
       .then(response => response.text())
       .then(result => {
@@ -139,6 +143,7 @@ function App() {
         console.log(res);
         if (res.code === 0) {
           let userDetails = res.data.userDetails;
+          console.log('userDetails :>> ', userDetails);
           let token = res.data.accessToken;
           setUser(userDetails);
           setToken(token);
@@ -175,14 +180,20 @@ function App() {
   return (
     <div>
       {
-        <Grid columns='equal' padded centered>
+        <
+          // @ts-ignore
+          Grid columns='equal' padded centered>
           {
             token === "" || theUser === null ?
               <Grid.Row>
                 <Grid.Column></Grid.Column>
                 <Grid.Column computer={ 8 } tablet={ 12 } mobile={ 16 }>
-                  <Segment loading={ loading }>
-                    <Form>
+                  <
+                    // @ts-ignore
+                    Segment loading={ loading }>
+                    <
+                      // @ts-ignore
+                      Form>
                       <Form.Group inline>
                         <label>Login via </label>
                         <Form.Field>
@@ -191,6 +202,7 @@ function App() {
                             name='loginTypeRadio'
                             value='OTP'
                             checked={ loginType === 'OTP' }
+                            // @ts-ignore
                             onChange={ (e, { value }) => { setLoginType(value); } }
                           />
                         </Form.Field>
@@ -200,6 +212,7 @@ function App() {
                             name='loginTypeRadio'
                             value='PWD'
                             checked={ loginType === 'PWD' }
+                            // @ts-ignore
                             onChange={ (e, { value }) => { setLoginType(value); } }
                           />
                         </Form.Field>
@@ -247,8 +260,12 @@ function App() {
               <Grid.Row>
                 <Grid.Column></Grid.Column>
                 <Grid.Column computer={ 8 } tablet={ 12 } mobile={ 16 }>
-                  <Segment loading={ loading }>
-                    <Header as="h1">Welcome, { theUser.sName }</Header>
+                  <
+                    // @ts-ignore
+                    Segment loading={ loading }>
+                    <
+                      // @ts-ignore
+                      Header as="h1">Welcome, { theUser.sName }</Header>
                     {
                       theUser !== null && theUser.acStatus !== "DEACTIVATED" ?
                         <Message>
@@ -265,7 +282,9 @@ function App() {
                           </p>
                         </Message>
                         :
-                        <Header as='h3' style={ { color: 'red' } }>Your Tata Sky Connection is deactivated.</Header>
+                        <
+                          // @ts-ignore
+                          Header as='h3' style={ { color: 'red' } }>Your Tata Sky Connection is deactivated.</Header>
                     }
 
                     <Button negative onClick={ logout }>Logout</Button>
