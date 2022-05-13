@@ -16,7 +16,7 @@ function App() {
   const [loginType, setLoginType] = useState("OTP");
   const [pwd, setPwd] = useState("");
 
-  const data = {"entitlements": [{ "type": "", "pkgId": "1000001038", "status": null }, { "type": "", "pkgId": "1000000401", "status": null }, { "type": "", "pkgId": "1000001015", "status": null }, { "type": "", "pkgId": "1000001274", "status": null }, { "type": "", "pkgId": "1000000002", "status": null }, { "type": "", "pkgId": "1000001015", "status": null }, { "type": "", "pkgId": "1000001035", "status": null }, { "type": "", "pkgId": "1000000001", "status": null }] }
+  const data = { "entitlements": [{ "type": "", "pkgId": "1000001038", "status": null }, { "type": "", "pkgId": "1000000401", "status": null }, { "type": "", "pkgId": "1000001015", "status": null }, { "type": "", "pkgId": "1000001274", "status": null }, { "type": "", "pkgId": "1000000002", "status": null }, { "type": "", "pkgId": "1000001015", "status": null }, { "type": "", "pkgId": "1000001035", "status": null }, { "type": "", "pkgId": "1000000001", "status": null }] }
 
   useEffect(() => {
     let tok = localStorage.getItem("token");
@@ -92,7 +92,7 @@ function App() {
   const authenticateUser = () => {
     setLoading(true);
     var myHeaders = new Headers();
-    myHeaders.append("authority", "kong-tatasky.videoready.tv");
+    myHeaders.append("authority", "tm.tapi.videoready.tv");
     myHeaders.append("sec-ch-ua", "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"");
     myHeaders.append("locale", "ENG");
     myHeaders.append("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
