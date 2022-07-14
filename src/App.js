@@ -36,7 +36,7 @@ function App() {
         console.log('mko');
         console.log(process.env.REACT_APP_M3U_FUNCTION_BASE_URL);
         var raw = JSON.stringify({
-          "long_url": 'https://my-tatasky.vercel.app' + '/api/getM3u?sid=' + theUser.sid + '_' + theUser.acStatus[0] + '&sname=' + theUser.sName + '&tkn=' + token + '&ent=' + data.entitlements.map(x => x.pkgId).join('_')
+          "long_url": 'https://my-tatasky.vercel.app' + '/api/getM3u?sid=' + theUser.sid + '_' + theUser.acStatus[0] + '&sname=' + theUser.sName + '&tkn=' + token + '&profileId' + theUser.profileId '&ent=' + data.entitlements.map(x => x.pkgId).join('_')
         });
 
         var requestOptions = {
@@ -93,11 +93,12 @@ function App() {
     setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("authority", "tm.tapi.videoready.tv");
-    myHeaders.append("sec-ch-ua", "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"");
+    // myHeaders.append("sec-ch-ua", "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\"");
     myHeaders.append("locale", "ENG");
-    myHeaders.append("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
+    myHeaders.append("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36");
     myHeaders.append("content-type", "application/json");
-    myHeaders.append("device_details", "{\"pl\":\"web\",\"os\":\"Linux\",\"lo\":\"en-us\",\"app\":\"1.35.32\",\"dn\":\"PC\",\"bv\":93,\"bn\":\"CHROME\",\"device_id\":\"1aacfdbadea40d5b350887a4fdd7ed771630761468278\",\"device_type\":\"WEB\",\"device_platform\":\"PC\",\"device_category\":\"open\",\"manufacturer\":\"Linux_CHROME_93\",\"model\":\"PC\",\"sname\":\"\"}");
+    myHeaders.append("device_details", "{\"pl\":\"web\",\"os\":\"WINDOWS\",\"lo\":\"en-us\",\"app\":\"1.36.35\",\"dn\":\"PC\",\"bv\":103,\"bn\":\"CHROME\",\"device_id\":\"YVJNVFZWVlZ7S01UZmRZTWNNQ3lHe0RvS0VYS0NHSwA\",\"device_type\":\"WEB\",\"device_platform\":\"PC\",\"device_category\":\"open\",\"manufacturer\":\"WINDOWS_CHROME_103\",\"model\":\"PC\",\"sname\":\"\"}");
+    myHeaders.append("kp", "false");
     myHeaders.append("sec-ch-ua-mobile", "?0");
     myHeaders.append("platform", "web");
     myHeaders.append("sec-ch-ua-platform", "\"Linux\"");
@@ -107,7 +108,7 @@ function App() {
     myHeaders.append("sec-fetch-mode", "cors");
     myHeaders.append("sec-fetch-dest", "empty");
     myHeaders.append("referer", "https://watch.tatasky.com/");
-    myHeaders.append("accept-language", "en-GB,en;q=0.9");
+    myHeaders.append("accept-language", "en-GB,en-US;q=0.9,en;q=0.8");
 
     // var raw = JSON.stringify({
     //   "rmn": rmn,
